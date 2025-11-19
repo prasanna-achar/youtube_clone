@@ -1,0 +1,32 @@
+server:
+  port: 8000
+
+
+spring:
+  application:
+    name: ApiGateway
+  cloud:
+    gateway:
+      server:
+        webflux:
+          routes:
+            - id: auth-service
+              uri: http://localhost:8010
+              predicates:
+                - Path=/auth/**
+            - id: profile-service
+              uri: http://localhost:8020
+              predicates:
+                  - Path=/profile/**
+            - id: video-service
+              uri: http://localhost:8030
+              predicates:
+                  - Path=/video/**
+
+
+  main:
+    web-application-type: REACTIVE
+
+
+jwt:
+  secret: movJ7JEEHukJFAPFbIUfRcL4IGBuBs6hWhG4IilWwQtNgcgna03W47GiLESsqKM8EaqiRB1lja+bF8/HTZNfwg==

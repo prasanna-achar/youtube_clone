@@ -1,0 +1,64 @@
+server:
+  port: 8030
+
+spring:
+  application:
+    name: video
+  amqp:
+    deserialization:
+      trust:
+        all: true
+
+  dir:
+    upload_dir: /uploads
+
+  datasource:
+    url: jdbc:postgresql://ep-frosty-bar-a1e4dx3u-pooler.ap-southeast-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require
+    username: neondb_owner
+    password: npg_AxSgXl59ynjQ
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      minimum-idle: 5
+      maximum-pool-size: 10
+      auto-commit: true
+      pool-name: HikariPool
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 50MB
+      max-request-size: 50MB
+
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+    # ✅ Correct format
+
+rabbitmq:
+  exchange:
+    name: video_exchange
+  queue:
+    video:
+      process:
+        name: video_processing_queue
+        key: video.processing
+      upload:
+        name: video_upload_queue
+        key: video.upload
+
+
+cloudinary:
+  name: dnd8nzkxl
+  apikey: 882829535539859
+  apisecret: oebUoZanAPwUPhdxCn1DAd3AkbA

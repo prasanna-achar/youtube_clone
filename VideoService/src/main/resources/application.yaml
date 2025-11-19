@@ -1,0 +1,23 @@
+
+
+
+spring:
+  application:
+    name: VideoService
+  datasource:
+    url: jdbc:postgresql://ep-rapid-forest-ahu8kjdu-pooler.c-3.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require
+    username: neondb_owner
+    password: npg_3dsqvx6KWLSp
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      minimum-idle: 5
+      maximum-pool-size: 10
+      auto-commit: true
+      pool-name: HikariPool
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true

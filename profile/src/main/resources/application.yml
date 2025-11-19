@@ -1,0 +1,31 @@
+server:
+  port: 8020
+
+
+spring:
+  application:
+    name: profile
+  datasource:
+    url: jdbc:postgresql://ep-autumn-darkness-a4676mz4-pooler.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require
+    username: neondb_owner
+    password: npg_R9WisaXfOev4
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      minimum-idle: 5
+      maximum-pool-size: 10
+      auto-commit: true
+      pool-name: HikariPool
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+
+
+
+cloudinary:
+  name: dnd8nzkxl
+  apikey: 882829535539859
+  apisecret: oebUoZanAPwUPhdxCn1DAd3AkbA
