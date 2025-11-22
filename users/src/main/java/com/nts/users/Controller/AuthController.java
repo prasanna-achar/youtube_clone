@@ -47,12 +47,12 @@ public class AuthController {
         return  new ResponseEntity<APIResponseBody>(response, response.getHttpStatus());
     }
     @PostMapping("/forgot-password")
-    public ResponseEntity<APIResponseBody> forgotPassword(ForgotPasswordSchema body){
-        APIResponseBody response = authService.resendOTP(body.getEmail());
+    public ResponseEntity<APIResponseBody> forgotPassword(@RequestBody ForgotPasswordSchema body){
+        APIResponseBody response = authService.forgotPasswordOrChangePassword(body.getEmail());
         return  new ResponseEntity<APIResponseBody>(response, response.getHttpStatus());
     }
 
-    @PostMapping("/reset-password")
+    @PostMapping("/reset-password/{token}")
     public ResponseEntity<APIResponseBody> resetPassword(@PathVariable String token,@RequestBody ResetPasswordSchema body){
         APIResponseBody response = authService.resetPassword(token, body.getPassword());
         return  new ResponseEntity<APIResponseBody>(response, response.getHttpStatus());

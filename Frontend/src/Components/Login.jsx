@@ -2,8 +2,16 @@ import React from 'react'
 import { useForm } from 'react-hook-form'
 import LoginSchema from '../TypeSchemas/LoginSchema'
 import { zodResolver } from '@hookform/resolvers/zod'
+import authStore from '../store/AuthStore'
 
 function Login() {
+
+  const {
+    login,
+    verificationCode,
+    isLoading
+  } = authStore();
+
 
   const {
     register,
@@ -17,8 +25,13 @@ function Login() {
     }
   });
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     console.log("Submitted values: ", data);
+    
+    await login(data);
+
+
+    console.log("Token ->>>>",verificationCode);
   };
 
   return (
@@ -75,10 +88,13 @@ function Login() {
             <tr>
               <td colSpan={2} className="pt-4">
                 <input
+                 
+
                   type="submit"
                   value="Login"
                   className="w-full bg-[#F4F4F4] p-3 rounded-lg font-semibold 
                              cursor-pointer hover:bg-white transition active:scale-[.98]"
+                  disabled = {isLoading ? true : false}
                 />
               </td>
             </tr>

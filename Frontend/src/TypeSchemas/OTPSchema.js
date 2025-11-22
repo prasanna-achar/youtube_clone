@@ -5,3 +5,5 @@ const OTPSchema = z.object({
         .min(6).max(6)
         .regex(/^[0-9]*$/, "Invalid input")
 })
+
+export default OTPSchema

@@ -22,7 +22,12 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
     show-sql: true
+    
 
+cloudinary:
+  name: dnd8nzkxl
+  apikey: 882829535539859
+  apisecret: oebUoZanAPwUPhdxCn1DAd3AkbA
 
 
 

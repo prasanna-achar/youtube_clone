@@ -1,10 +1,10 @@
 import React from 'react'
-import Signup from '../Components/Signup'
+import Signup from '../../Components/Signup'
 
 function SignupPage() {
   return (
     <div
-    className='w-full h-[100vh] flex items-center justify-center'
+    className='w-screen h-screen flex items-center justify-center'
     >
         <Signup />
     </div>

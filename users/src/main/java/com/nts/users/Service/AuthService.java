@@ -225,6 +225,7 @@ public class AuthService {
         );
     }
     public APIResponseBody forgotPasswordOrChangePassword(String email){
+        System.out.println(email);
         if(!authRepository.existsByEmail(email)){
             return new APIFailResponse(HttpStatus.NOT_FOUND, "User not found with this email");
         }

@@ -107,7 +107,9 @@ public final class CloudinaryUtils {
         try {
             cloudinary
                     .api()
-                    .deleteFolder(getFolder(masterUrl), ObjectUtils.emptyMap());
+                    .deleteAllResources(ObjectUtils.emptyMap(
+
+                    ));
             return true;
         } catch (Exception e) {
             throw new RuntimeException(e);

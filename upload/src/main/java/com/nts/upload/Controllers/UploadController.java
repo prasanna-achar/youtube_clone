@@ -66,4 +66,16 @@ public class UploadController {
         return new ResponseEntity<>(responseBody, responseBody.getHttpStatus());
 
     }
+
+    @GetMapping("/my-video")
+    public ResponseEntity<ResponseBody> getMyVideos(@RequestHeader("X-User-Id") String userId){
+        ResponseBody responseBody = uploadService.getVideoByUserId(userId);
+        return new ResponseEntity<>(responseBody, responseBody.getHttpStatus());
+    }
+
+    @GetMapping("/{userId}")
+    public ResponseEntity<ResponseBody> getUserVideos(@PathVariable String userId){
+        ResponseBody responseBody = uploadService.getVideoByUserId(userId);
+        return new ResponseEntity<>(responseBody, responseBody.getHttpStatus());
+    }
 }

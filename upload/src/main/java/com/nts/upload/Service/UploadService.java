@@ -23,6 +23,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -182,12 +183,6 @@ public class UploadService {
             return new ApiFailResponse(HttpStatus.NOT_ACCEPTABLE, "You are not authorized to delete this video");
         }
 
-        try {
-            cloudinaryUtils.deleteVideo(video.getVideoLinks().get("auto"));
-        }catch (Exception e){
-            System.out.println("Error occurred during deleting video:: Cloudinary Deleting time");
-            throw new RuntimeException(e);
-        }
         videoRepository.deleteById(Id);
         return new ApiSuccessResponse<>("Video has been deleted successfully");
     }
@@ -205,15 +200,23 @@ public class UploadService {
             return new ApiFailResponse(HttpStatus.NOT_FOUND, "Video Not found");
         }
 
+
         return new ApiSuccessResponse<Video>(HttpStatus.ACCEPTED, "Success",
                 videoRepository.findByToken(token).get()
         );
     }
 
     public ResponseBody getAllVideos(){
+
+        List<Video> videos = videoRepository.findAll()
+                .stream()
+                .filter(v -> v.getVideoUploadingStatus() == VideoUploadingStatus.UPLOADED)
+                .toList();
+
+
         return new ApiSuccessResponse<>(HttpStatus.OK,
                 "All video have been successfully fetched",
-                videoRepository.findAll());
+                videos);
     }
 
     public void changeVideo(String Id, MultipartFile video){
@@ -226,8 +229,11 @@ public class UploadService {
                 .get()
                 .getVideoLinks();
         String masterUrl =  links.get("auto");
-        cloudinaryUtils.deleteVideo(masterUrl);
 
+    }
+
+    public ResponseBody getVideoByUserId(String userId){
+        return new ApiSuccessResponse<>(HttpStatus.OK, "fetched all videos" , videoRepository.findAllByUserId(userId));
     }
 
 }
